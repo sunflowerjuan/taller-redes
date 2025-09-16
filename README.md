@@ -1,6 +1,8 @@
 # TALLER DOCKER COMPOSE
 
-Tenemos el docker compose donde declaramos los dos servicios, y modificamos el archivo [docker-compose.yml](docker-compose.yml) conectandolos por defecto a la red bridge sin declarar redes
+## DOCKER COMPOSE SIN DECLARAR REDES
+
+Tenemos el docker compose donde declaramos los dos servicios, y modificamos el archivo [docker-compose.yml](docker-compose.yml) utilizando la red bridge sin declarar una red como tal
 
 ![Docker Compose sin declarar redes](img/docker-compose_1.png)
 
@@ -10,7 +12,7 @@ Subimos nuestros servicios nuevamente con el nuevo archivo docker-compose e inte
 curl -X POST http://localhost:3000/movies \
   -H "Content-Type: application/json" \
   -d '{
-    "id": 9999,
+    "id": 99999,
     "title": "The Montecarlo Experiment",
     "original_title": "The Montecarlo Experiment",
     "overview": "Un experimento que sale mal.",
@@ -28,22 +30,11 @@ curl -X POST http://localhost:3000/movies \
 
 Esta es la salida de nuestra peticion POST
 
-![POST sin declarar redes](img/post-1.png)
+![peticion POST sin declarar redes](img/post-1.png)
 
-Estos son los logs que muestra nuestra API
+nos muestra un error de conexion con el servidor, ya que no puede identificar el nombre del servicio
 
-![LOGS sin declarar redes](img/logs-1.png)
-
-Verificamos la existencia de nuestra nueva pelicula en la base de datos mediante la siguiente consulta:
-
-```bash
-MATCH (m:Movie {id: 9999})
-RETURN m;
-```
-
-![consulta sin declarar redes](img/query-1.png)
-
-Ahi aparece definida en la segunda posicion, al parecer le atine sin querer a un id que ya existia
+## DOCKER COMPOSE DECLARANDO REDES
 
 Ahora, Subiremos nuestros servicios nuevamente con una modificacion a nuestro archivo docker-compose e intentaremos conectarnos a la base de datos con nuestra API pero esta vez declararemos una red llamada **user-defined**, configuraremos ambos servicios en esta red. asi quedaria el archivo [docker-compose.yml](docker-compose.yml)
 
