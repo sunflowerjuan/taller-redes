@@ -41,7 +41,7 @@ MATCH (m:Movie {id: 9999})
 RETURN m;
 ```
 
-![consulta sin declarar redes](img/consult-1.png)
+![consulta sin declarar redes](img/query-1.png)
 
 Ahi aparece definida en la segunda posicion, al parecer le atine sin querer a un id que ya existia
 
@@ -86,7 +86,7 @@ MATCH (m:Movie {id: 99998})
 RETURN m;
 ```
 
-![consulta declarar redes](img/consult-2.png)
+![consulta declarar redes](img/query-2.png)
 
 ## Conclusion
 
