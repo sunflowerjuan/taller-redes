@@ -34,6 +34,17 @@ Estos son los logs que muestra nuestra API
 
 ![LOGS sin declarar redes](img/logs-1.png)
 
+Verificamos la existencia de nuestra nueva pelicula en la base de datos mediante la siguiente consulta:
+
+```bash
+MATCH (m:Movie {id: 9999})
+RETURN m;
+```
+
+![consulta sin declarar redes](img/consult-1.png)
+
+Ahi aparece definida en la segunda posicion, al parecer le atine sin querer a un id que ya existia
+
 Ahora, Subiremos nuestros servicios nuevamente con una modificacion a nuestro archivo docker-compose e intentaremos conectarnos a la base de datos con nuestra API pero esta vez declararemos una red llamada **user-defined**, configuraremos ambos servicios en esta red. asi quedaria el archivo [docker-compose.yml](docker-compose.yml)
 
 ![Docker Compose declarar redes](img/docker-compose_2.png)
@@ -67,6 +78,15 @@ Esta es la salida de nuestra peticion POST
 Estos son los logs que muestra nuestra API
 
 ![LOGS sin declarar redes](img/logs-2.png)
+
+Verificamos la existencia de nuestra nueva pelicula en la base de datos mediante la siguiente consulta:
+
+```bash
+MATCH (m:Movie {id: 99998})
+RETURN m;
+```
+
+![consulta declarar redes](img/consult-2.png)
 
 ## Conclusion
 
